@@ -51,17 +51,18 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     <div className="row">
       <h1>{title}</h1>
       <div className="row__posters">
-        {movies?.map((movie, index) => (
-          <img
-            onClick={() => handleClick(movie)}
-            key={index}
-            src={`${base_url}${
-              isLargeRow ? movie.poster_path : movie.backdrop_path
-            }`}
-            alt={movie.name}
-            className={`row__poster ${isLargeRow && "row__posterLarge"}`}
-          />
-        ))}
+        {movies && movies.length > 0 ?
+          movies?.map((movie, index) => (
+            <img
+              onClick={() => handleClick(movie)}
+              key={index}
+              src={`${base_url}${
+                isLargeRow ? movie.poster_path : movie.backdrop_path
+              }`}
+              alt={movie.name}
+              className={`row__poster ${isLargeRow ? "row__posterLarge" : ""}`}
+            />
+          )):<p>No data found</p>}
       </div>
       <div style={{ padding: "20px" }}>
         {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
